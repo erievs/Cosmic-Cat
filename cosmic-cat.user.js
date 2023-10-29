@@ -7141,3 +7141,23 @@ YabaiComponent.addHandler("click", "subscribe-button", document.cosmicCat.Action
 YabaiComponent.addHandler("click", "masthead-user-menu-expander", document.cosmicCat.Actions.handleExpander);
 YabaiComponent.addHandler("click", "guide-item-container", document.cosmicCat.Actions.handleGuideItem);
 })();
+
+(function() {
+    'use strict';
+
+    // Function to expand the video description
+    function expandVideoDescription() {
+        var descriptionToggle = document.getElementById("watch-description-toggle");
+
+        if (descriptionToggle) {
+            // Change the class to expand the description
+            descriptionToggle.className = "yt-uix-expander yt-uix-expander-expanded";
+
+            // Log the action
+            console.log("Video description expanded.");
+        }
+    }
+
+    // Run the function when the page is loaded
+    window.addEventListener('load', expandVideoDescription);
+})();
