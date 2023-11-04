@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cosmic Cat
 // @namespace    https://www.youtube.com/*
-// @version      0.7.1
+// @version      0.7.2
 // @description  Broadcast Yourself
 // @author       Thistle Café, Cosmic Cat Maintainers
 // @updateURL    https://raw.githubusercontent.com/cosmic-cat-yt/cosmic-cat/main/cosmic-cat.user.js
@@ -3329,12 +3329,12 @@ ${localizeString("stats.likesdislikes")}
 </div>
 <div id="watch-description-toggle" class="yt-uix-expander-head">
 <div id="watch-description-expand" class="expand">
-<button type="button" class="metadata-inline yt-uix-button yt-uix-button-text" onclick="return false;" role="button">
+<button id="evs-show-more" type="button" class="metadata-inline yt-uix-button yt-uix-button-text" onclick="return false;" role="button">
 <span class="yt-uix-button-content">${localizeString("buttons.watch.showmore")} <img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="${localizeString("buttons.watch.showmore")}"></span>
 </button>
 </div>
 <div id="watch-description-collapse" class="collapse">
-<button type="button" class="metadata-inline yt-uix-button yt-uix-button-text" onclick="return false;" role="button">
+<button id="evs-show-more" type="button" class="metadata-inline yt-uix-button yt-uix-button-text" onclick="return false;" role="button">
 <span class="yt-uix-button-content">${localizeString("buttons.watch.showless")} <img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="${localizeString("buttons.watch.showless")}"></span>
 </button>
 </div>
@@ -3564,7 +3564,7 @@ ${document.cosmicCat.Template.Buttons.addTo(videoData.id)}
 <div class="comments-textarea-container" onclick="document.cosmicCat.Comments.Form.init();">
 <img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="" class="comments-textarea-tip">
 <label class="comments-textarea-label" data-upsell="comment">${localizeString("watch.comments.respond")}</label>  <div class="yt-uix-form-input-fluid yt-grid-fluid ">
-<textarea id="" class="yt-uix-form-textarea comments-textarea" onfocus="document.cosmicCat.Comments.Form.init();" data-upsell="comment" name="comment"></textarea>
+<textarea id="evs-change-comment-text" class="yt-uix-form-textarea comments-textarea" onfocus="document.cosmicCat.Comments.Form.init();" data-upsell="comment" name="comment"></textarea>
 </div>
 </div>
 <p class="comments-remaining">
@@ -7161,3 +7161,51 @@ YabaiComponent.addHandler("click", "guide-item-container", document.cosmicCat.Ac
     // Run the function when the page is loaded
     window.addEventListener('load', expandVideoDescription);
 })();
+
+
+// NeoCat - KSPortalcraft - Ere Valley Software - EVS 
+
+// - Show More Video Page Fix
+
+// It's very weird I added id="evs-show-more" and these lines of code and 
+// it fixed it.
+
+function logOnShowMoreClick() {
+    console.log('Clicked "Show more" button');
+}
+
+document.querySelector('#evs-show-more').addEventListener('click', logOnShowMoreClick);
+
+// - Replies Fix
+
+// Currently the comment posting is broken and I'll fix it or wait for a fix
+// but I just wanted to include this for now, it grabs the metadata from a 
+// comment uses the author's name and adding it to the comment box.
+
+document.addEventListener('click', function(event) {
+    const replyButton = event.target.closest('button[data-action="reply"]');
+    if (replyButton) {
+        // Find the author's name in the metadata
+        const metadataElement = replyButton.closest('.comment').querySelector('.metadata');
+        if (metadataElement) {
+            const authorElement = metadataElement.querySelector('.author a');
+            if (authorElement) {
+                const author = authorElement.textContent;
+
+                const taggedAuthor = `${author}`;
+
+                // Find the comment form
+                const commentForm = document.querySelector('#evs-change-comment-text'); 
+                if (commentForm) {
+
+                    commentForm.value = taggedAuthor;
+
+
+                    console.log('Added text to comment form:', taggedAuthor);
+                }
+            }
+        }
+    }
+});
+
+// - More to probbaly come!
