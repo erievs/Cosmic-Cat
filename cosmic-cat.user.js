@@ -3328,13 +3328,13 @@ ${localizeString("stats.likesdislikes")}
 <span class="third"></span>
 </div>
 <div id="watch-description-toggle" class="yt-uix-expander-head">
-<div id="watch-description-expand" class="expand">
-<button id="evs-show-more" type="button" class="metadata-inline yt-uix-button yt-uix-button-text" onclick="return false;" role="button">
+<div id="evs-show-more" id="watch-description-expand" class="expand">
+<button type="button" class="metadata-inline yt-uix-button yt-uix-button-text" onclick="return false;" role="button">
 <span class="yt-uix-button-content">${localizeString("buttons.watch.showmore")} <img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="${localizeString("buttons.watch.showmore")}"></span>
 </button>
 </div>
 <div id="watch-description-collapse" class="collapse">
-<button id="evs-show-more" type="button" class="metadata-inline yt-uix-button yt-uix-button-text" onclick="return false;" role="button">
+<button type="button" class="metadata-inline yt-uix-button yt-uix-button-text" onclick="return false;" role="button">
 <span class="yt-uix-button-content">${localizeString("buttons.watch.showless")} <img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="${localizeString("buttons.watch.showless")}"></span>
 </button>
 </div>
