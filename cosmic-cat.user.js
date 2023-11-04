@@ -1,9 +1,8 @@
 // ==UserScript==
-// @name         Cosmic Cat
-// @namespace    https://www.youtube.com/*
+// @name         Neo Cat
 // @version      0.7.2
-// @description  Broadcast Yourself
-// @author       Thistle Café, Cosmic Cat Maintainers
+// @description  Broadcast Yourself Again
+// @author       Thistle Café, Cosmic Cat Maintainers, KSPortalcraft/EVS/NCP
 // @updateURL    https://raw.githubusercontent.com/cosmic-cat-yt/cosmic-cat/main/cosmic-cat.user.js
 // @downloadURL  https://raw.githubusercontent.com/cosmic-cat-yt/cosmic-cat/main/cosmic-cat.user.js
 // @license      The Unlicense
@@ -3328,13 +3327,13 @@ ${localizeString("stats.likesdislikes")}
 <span class="third"></span>
 </div>
 <div id="watch-description-toggle" class="yt-uix-expander-head">
-<div id="evs-show-more" id="watch-description-expand" class="expand">
-<button type="button" class="metadata-inline yt-uix-button yt-uix-button-text" onclick="return false;" role="button">
+<div id="watch-description-expand" class="expand">
+<button id="evs-show-more" type="button" class="metadata-inline yt-uix-button yt-uix-button-text" onclick="return false;" role="button">
 <span class="yt-uix-button-content">${localizeString("buttons.watch.showmore")} <img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="${localizeString("buttons.watch.showmore")}"></span>
 </button>
 </div>
 <div id="watch-description-collapse" class="collapse">
-<button type="button" class="metadata-inline yt-uix-button yt-uix-button-text" onclick="return false;" role="button">
+<button id="evs-show-more" type="button" class="metadata-inline yt-uix-button yt-uix-button-text" onclick="return false;" role="button">
 <span class="yt-uix-button-content">${localizeString("buttons.watch.showless")} <img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="${localizeString("buttons.watch.showless")}"></span>
 </button>
 </div>
@@ -3631,7 +3630,7 @@ ${data.likes}<img class="comments-rating-thumbs-up" style="vertical-align: botto
 </button>
 </span>
 <span class="yt-uix-button-group">
-<button type="button" class="start comment-action yt-uix-button yt-uix-button-default" onclick=";return false;" data-action="reply" role="button">
+<button id="evs-reply" type="button" class="start comment-action yt-uix-button yt-uix-button-default" onclick=";return false;" data-action="reply" role="button">
 <span class="yt-uix-button-content">Reply </span>
 </button><button type="button" class="end yt-uix-button yt-uix-button-default yt-uix-button-empty" onclick=";return false;" data-button-has-sibling-menu="true" role="button" aria-pressed="false" aria-expanded="false" aria-haspopup="true" aria-activedescendant="">
 <img class="yt-uix-button-arrow" src="//s.ytimg.com/yts/img/pixel-vfl3z5WfW.gif" alt="">
@@ -7132,6 +7131,56 @@ document.cosmicCat.Utils.waitForElm(".yt-main").then(function () {
     document.cosmicCat.www["404"]();
 });
 
+// NeoCat - KSPortalcraft - Ere Valley Software - EVS
+
+
+// - Replies Fix
+
+// Currently the comment posting is broken and I'll fix it or wait for a fix
+// but I just wanted to include this for now, it grabs the metadata from a
+// comment uses the author's name and adding it to the comment box.
+
+document.addEventListener('click', function(event) {
+    const replyButton = event.target.closest('button[data-action="reply"]');
+    if (replyButton) {
+
+        const metadataElement = replyButton.closest('.comment').querySelector('.metadata');
+        if (metadataElement) {
+            const authorElement = metadataElement.querySelector('.author a');
+            if (authorElement) {
+                const author = authorElement.textContent;
+
+                const taggedAuthor = `${author}`;
+
+                // Find the comment form
+                const commentForm = document.querySelector('#evs-change-comment-text'); // Replace with the correct ID
+                if (commentForm) {
+
+                    commentForm.value = taggedAuthor;
+
+                    console.log('Added text to comment form:', taggedAuthor);
+                }
+            }
+        }
+    }
+});
+
+// - Show More Video Page Fix
+
+// It's very weird I added id="evs-show-more" and these lines of code and
+// it fixed it.
+
+function logOnShowMoreClick() {
+    console.log('Clicked "Show more" button');
+}
+
+document.querySelector('#evs-show-more').addEventListener('click', logOnShowMoreClick);
+
+
+
+
+// - More to probbaly come!
+
 
 // Need to merge handleButton and handleSubscribeButton together
 YabaiComponent.addHandler("click", "yt-uix-button-default", document.cosmicCat.Actions.handleButton);
@@ -7142,70 +7191,5 @@ YabaiComponent.addHandler("click", "masthead-user-menu-expander", document.cosmi
 YabaiComponent.addHandler("click", "guide-item-container", document.cosmicCat.Actions.handleGuideItem);
 })();
 
-(function() {
-    'use strict';
-
-    // Function to expand the video description
-    function expandVideoDescription() {
-        var descriptionToggle = document.getElementById("watch-description-toggle");
-
-        if (descriptionToggle) {
-            // Change the class to expand the description
-            descriptionToggle.className = "yt-uix-expander yt-uix-expander-expanded";
-
-            // Log the action
-            console.log("Video description expanded.");
-        }
-    }
-
-    // Run the function when the page is loaded
-    window.addEventListener('load', expandVideoDescription);
-})();
 
 
-// NeoCat - KSPortalcraft - Ere Valley Software - EVS 
-
-// - Show More Video Page Fix
-
-// It's very weird I added id="evs-show-more" and these lines of code and 
-// it fixed it.
-
-function logOnShowMoreClick() {
-    console.log('Clicked "Show more" button');
-}
-
-document.querySelector('#evs-show-more').addEventListener('click', logOnShowMoreClick);
-
-// - Replies Fix
-
-// Currently the comment posting is broken and I'll fix it or wait for a fix
-// but I just wanted to include this for now, it grabs the metadata from a 
-// comment uses the author's name and adding it to the comment box.
-
-document.addEventListener('click', function(event) {
-    const replyButton = event.target.closest('button[data-action="reply"]');
-    if (replyButton) {
-        // Find the author's name in the metadata
-        const metadataElement = replyButton.closest('.comment').querySelector('.metadata');
-        if (metadataElement) {
-            const authorElement = metadataElement.querySelector('.author a');
-            if (authorElement) {
-                const author = authorElement.textContent;
-
-                const taggedAuthor = `${author}`;
-
-                // Find the comment form
-                const commentForm = document.querySelector('#evs-change-comment-text'); 
-                if (commentForm) {
-
-                    commentForm.value = taggedAuthor;
-
-
-                    console.log('Added text to comment form:', taggedAuthor);
-                }
-            }
-        }
-    }
-});
-
-// - More to probbaly come!
