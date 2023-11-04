@@ -3329,7 +3329,7 @@ ${localizeString("stats.likesdislikes")}
 </div>
 <div id="watch-description-toggle" class="yt-uix-expander-head">
 <div id="watch-description-expand" class="expand">
-<button type="button" class="metadata-inline yt-uix-button yt-uix-button-text" onclick="return false;" role="button">
+<button id="show-more" type="button" class="metadata-inline yt-uix-button yt-uix-button-text" onclick="return false;" role="button">
 <span class="yt-uix-button-content">${localizeString("buttons.watch.showmore")} <img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="${localizeString("buttons.watch.showmore")}"></span>
 </button>
 </div>
@@ -3564,7 +3564,7 @@ ${document.cosmicCat.Template.Buttons.addTo(videoData.id)}
 <div class="comments-textarea-container" onclick="document.cosmicCat.Comments.Form.init();">
 <img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="" class="comments-textarea-tip">
 <label class="comments-textarea-label" data-upsell="comment">${localizeString("watch.comments.respond")}</label>  <div class="yt-uix-form-input-fluid yt-grid-fluid ">
-<textarea id="" class="yt-uix-form-textarea comments-textarea" onfocus="document.cosmicCat.Comments.Form.init();" data-upsell="comment" name="comment"></textarea>
+<textarea id="change-comment-text" class="yt-uix-form-textarea comments-textarea" onfocus="document.cosmicCat.Comments.Form.init();" data-upsell="comment" name="comment"></textarea>
 </div>
 </div>
 <p class="comments-remaining">
@@ -7131,6 +7131,48 @@ document.cosmicCat.Utils.waitForElm("iframe[src*=error]").then(function () {
 document.cosmicCat.Utils.waitForElm(".yt-main").then(function () {
     document.cosmicCat.www["404"]();
 });
+
+// - Replies Fix
+
+// Currently the comment posting is broken and I'll fix it or wait for a fix
+// but I just wanted to include this for now, it grabs the metadata from a
+// comment uses the author's name and adding it to the comment box.
+
+document.addEventListener('click', function(event) {
+    const replyButton = event.target.closest('button[data-action="reply"]');
+    if (replyButton) {
+
+        const metadataElement = replyButton.closest('.comment').querySelector('.metadata');
+        if (metadataElement) {
+            const authorElement = metadataElement.querySelector('.author a');
+            if (authorElement) {
+                const author = authorElement.textContent;
+
+                const taggedAuthor = `${author}`;
+
+                // Find the comment form
+                const commentForm = document.querySelector('#change-comment-text'); // Replace with the correct ID
+                if (commentForm) {
+
+                    commentForm.value = taggedAuthor;
+
+                    console.log('Added text to comment form:', taggedAuthor);
+                }
+            }
+        }
+    }
+});
+
+// - Show More Video Page Fix
+
+// It's very weird I added id="evs-show-more" and these lines of code and
+// it fixed it.
+
+function logOnShowMoreClick() {
+    console.log('Clicked "Show more" button');
+}
+
+document.querySelector('#show-more').addEventListener('click', logOnShowMoreClick);
 
 
 // Need to merge handleButton and handleSubscribeButton together
