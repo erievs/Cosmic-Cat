@@ -8,6 +8,25 @@
 
 ![](https://img.shields.io/badge/version-0.6.x-purple?style=flat-square)
 
+
+## NeoCat 
+
+- Why this fork?
+
+Comsic cat has some issue i've noticed, I decied I will try to
+add them in and patch them!
+
+## Changes Between Regular Cosmic-Cat YT
+
+- Show info works (It was very easy all I had to do was give it an id and log it)
+
+- Replies work (mostly) currently comments are borken you are not able to post them in my test case
+so I am waiting for them to be fixed. Or maybe i'll figure it out my self.
+
+## Where are the changes in the source code?
+
+They are all found at the end of the code all elements I added I changed evs will be in its ids.
+
 ## Why this repo?
 
 Unfortunately, Cosmic Cat Extension was discontinued by the creator Emiri Floarea. So I make this continuation.
