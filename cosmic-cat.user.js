@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Neo Cat
-// @version      0.7.2
+// @version      0.7.2.1
 // @description  Broadcast Yourself Again
 // @author       Thistle Café, Cosmic Cat Maintainers, KSPortalcraft/EVS/NCP
 // @updateURL    https://raw.githubusercontent.com/cosmic-cat-yt/cosmic-cat/main/cosmic-cat.user.js
@@ -2346,6 +2346,7 @@ ${localizeString("global.loading.main")}
                     Main: () => {
                         return `<div class="guide-section yt-uix-expander">
 <h3 class="guide-item-container selected-child">
+<h3>Warning - Most Of These Are Broken!</h3/
 <a class="guide-item selected" data-feed-name="youtube" data-feed-url="/" data-feed-display="${localizeString("guide.fromyt")}">
 <span class="thumb">
 <img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="" class="system-icon category">
