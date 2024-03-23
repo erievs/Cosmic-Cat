@@ -12,7 +12,7 @@
 // @icon         https://github.com/cosmic-cat-yt/cosmic-cat-branding/raw/main/icon.png
 // @require      https://github.com/cosmic-cat-yt/cosmic-cat/raw/main/modules/yabai_component.js
 // @require      https://github.com/cosmic-cat-yt/cosmic-cat/raw/main/modules/open_uix_components.js
-// @require      https://code.jquery.com/jquery-3.6.1.min.js
+// @require      https://code.jquery.com/jquery-3.7.1.min.js
 // @grant unsafeWindow
 // @grant GM_addStyle
 // @grant GM.getValue
