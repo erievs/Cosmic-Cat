@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Neo Cat
-// @version      0.7.2.1
+// @version      0.7.2.2
 // @description  Broadcast Yourself Again
 // @author       Thistle Café, Cosmic Cat Maintainers, KSPortalcraft/EVS/NCP
 // @updateURL    https://raw.githubusercontent.com/cosmic-cat-yt/cosmic-cat/main/cosmic-cat.user.js
